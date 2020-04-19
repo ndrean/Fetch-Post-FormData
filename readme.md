@@ -1,6 +1,8 @@
-## Post a form with fetch and use FormData and render asynchronously the data
+## Post a form with fetch and use FormData and render data from an API asynchronously
 
 Displayed at: <http://postFormData.surge.sh>
+
+API used to POST : <https://reqres.in/api/users/>
 
 Declare an `async` rendering function:
 
