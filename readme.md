@@ -1,6 +1,6 @@
 ## Post a form with fetch and use FormData and render asynchronously the data
 
-Displayed at: <htp://postFromData.surge.sh>
+Displayed at: <http://postFormData.surge.sh>
 
 Declare an `async` rendering function:
 
