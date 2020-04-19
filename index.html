@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        .card {
+            border: 1px solid grey;
+            min-width: 50%;
+            height: auto;
+        }
+
+        .flex {
+            display: flex;
+        }
+
+        .box {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="flex">
+        <div class='card'>
+            <form id="axios" method="post">
+                <div class="form-group">
+                    <label for="name">Your name</label>
+                    <input id="name" type="text" name="first_name" class="box">
+                </div>
+
+                <div class="form-group">
+                    <label for="job">Your job</label>
+                    <input id="job" type="text" name="his_job" class="box">
+                </div>
+                <div class="form-group">
+                    <label for="mail">Your mail</label>
+                    <input id="mail" type="email" name="his_email" class="box">
+                </div>
+                <div class="form-group">
+                    <label for="number">Your number</label>
+                    <input id="number" type="number" name="his_number" class="box">
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Post it!" class="btn btn-primary mx-auto">
+                </div>
+            </form>
+        </div>
+
+        <div class='card'>
+            <p id="resu1"></p>
+        </div>
+    </div>
+    <script type="module" src="index.js"></script>
+
+
+</body>
+
+</html>
