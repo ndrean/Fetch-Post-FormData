@@ -29,7 +29,7 @@ and chain the promises:
 ```javascript
 const myForm = new FormData(userForm);
 const response = await fetch(uriu, { method: "POST", body: myForm });
-display("Post Fetch new ID :", resposne.id)
+display("Post Fetch new ID :", response.id)
   .then(show())
   .then(document.querySelector("form").reset());
 ```
