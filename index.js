@@ -21,7 +21,9 @@ document.querySelector("form").addEventListener("submit", async (e) => {
   try {
     const response = await fetch(uriu, { method: "POST", body: myForm });
     const result = await response.json();
-    display("Post Fetch new ID :", result.id).then(show());
+    display("Post Fetch new ID :", result.id)
+      .then(show())
+      .then(document.querySelector("form").reset());
   } catch (err) {
     console.log(err);
   }
