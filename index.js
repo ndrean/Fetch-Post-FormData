@@ -17,11 +17,13 @@ const insert = (text) => {
 const serializeForm = (formData) => {
   let obj = {};
   let params = new URLSearchParams();
-  let payload = "";
   for (let [k, v] of formData.entries()) {
+    // create on object from the FormData
     obj[k] = v;
+    // create an URLSearcParams from the FormData
     params.append(k, v);
   }
+  // the function will return an object with 3 keys, depending upon usage
   return {
     obj: obj,
     queryString: params.toString(),
@@ -37,22 +39,29 @@ async function getData(tag) {
       const response = await fetch(uriu, {
         method: "POST",
         body: new FormData(e.target),
-        // body: serializeForm(myform).payload,
-      }); // new FormData(document.querySelector('form'))
+        // body: serializeForm(myform).payload is possible, depending upon URL
+      });
+
       if (!response.ok) {
         return Promise.reject(response);
       }
+
       const data = await response.json();
+
+      // part for the HTML rendering
       insert(
-        "We normally pass the <code>new FormData(e.target)</code> to the <em>body</em> of the <em>fetch</em> request."
+        "We normally pass the <code>new FormData(e.target)</code> after listening to the submit of the form. We pass this directly to the <em>body</em> of the <em>fetch</em> request."
       );
-      display("Your new ID is: ", data.id);
+      display(
+        "The API responds to the Post request by giving a new ID, which is : ",
+        data.id
+      );
       insert(
         "The data in the form can be transformed into a query string for GET by URLSearchParams:"
       );
       insert(`<p> ${serializeForm(myform).queryString}</p>`);
       insert(
-        "For a POST request, we pass also may to pass the FormData by serializing it into an object and stringify this json"
+        "For a POST request, we can pass the payload as a string by serializing  (formdata => object) and then stringify this json"
       );
       insert(`<p> ${serializeForm(myform).payload}</p>`);
     } catch (error) {
