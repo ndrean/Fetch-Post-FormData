@@ -13,11 +13,11 @@ const insert = (text) => {
     .insertAdjacentHTML("beforeend", `<p> ${text}</p>`);
 };
 
-// iterate on a FormData using FormData.entries and not using  Object.entries(FormData)
-const serializeForm = (formData) => {
+const serializeForm = (formdata) => {
   let obj = {};
   let params = new URLSearchParams();
-  for (let [k, v] of formData.entries()) {
+  // iterate on a FormData using FormData directly, and not using  Object.entries(FormData)
+  for (let [k, v] of formdata) {
     // create on object from the FormData
     obj[k] = v;
     // create an URLSearcParams from the FormData
@@ -32,14 +32,17 @@ const serializeForm = (formData) => {
 };
 
 async function getData(tag) {
-  document.querySelector(tag).addEventListener("submit", async (e) => {
+  // document.querySelector(tag).addEventListener("submit", async (e) => {
+  document.querySelector(tag).onsubmit = async (e) => {
     e.preventDefault();
     try {
       const myform = new FormData(e.target);
       const response = await fetch(uriu, {
         method: "POST",
-        body: new FormData(e.target),
-        // body: serializeForm(myform).payload is possible, depending upon URL
+        // 'fetch' accepts a FromData object as a body, 'Content-Type:multipart/forma-data'
+        body: myform,
+        /* body: serializeForm(myform).payload is possible, if end-point wants a string.
+        In that case, we need to declare header : { "Content-type: "application/json"} */
       });
 
       if (!response.ok) {
@@ -47,27 +50,28 @@ async function getData(tag) {
       }
 
       const data = await response.json();
+      console.log(data);
 
       // part for the HTML rendering
       insert(
-        "We normally pass the <code>new FormData(e.target)</code> after listening to the submit of the form. We pass this directly to the <em>body</em> of the <em>fetch</em> request."
+        "We listen to the submit of the form and pass directly <code>body: new FormData(e.target)</code>."
       );
       display(
-        "The API responds to the Post request by giving a new ID, which is : ",
-        data.id
+        "The API responds to the Post request by giving a new ID with timestamp: ",
+        "ID :" + data.id + ", the " + data.createdAt
       );
       insert(
         "The data in the form can be transformed into a query string for GET by URLSearchParams:"
       );
       insert(`<p> ${serializeForm(myform).queryString}</p>`);
       insert(
-        "For a POST request, we can pass the payload as a string by serializing  (formdata => object) and then stringify this json"
+        "For a POST request, we can pass also the payload as a string by serializing  (formdata => object) and then stringify this json"
       );
       insert(`<p> ${serializeForm(myform).payload}</p>`);
     } catch (error) {
       console.warn(error);
     }
-  });
+  };
 }
 
 getData("form").then(userForm.reset());
