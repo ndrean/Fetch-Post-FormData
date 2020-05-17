@@ -1,6 +1,7 @@
 ## Post a form with fetch and use FormData and render data from an API asynchronously
 
 Displayed with [surge](https://surge.sh) at: <https://postFormData.surge.sh>
+or < https://ndrean.github.io/Fetch-Post-FormData/>
 
 API used to POST : uriu: <https://reqres.in/api/users/>
 
